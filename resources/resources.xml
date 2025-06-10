@@ -1,0 +1,6 @@
+<resources>
+    <layouts></layouts>
+    <texts>
+        <text id="route_gpx" file="${projectDir}/src/resources/route.gpx" />
+    </texts>
+</resources>

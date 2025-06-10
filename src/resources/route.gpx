@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="example">
+  <wpt lat="37.7749" lon="-122.4194"><name>Start</name><ele>10</ele></wpt>
+  <trk>
+    <name>Sample Route</name>
+    <trkseg>
+      <trkpt lat="37.7749" lon="-122.4194"><ele>10</ele></trkpt>
+      <trkpt lat="37.7750" lon="-122.4180"><ele>20</ele></trkpt>
+      <trkpt lat="37.7755" lon="-122.4170"><ele>25</ele></trkpt>
+    </trkseg>
+  </trk>
+</gpx>
