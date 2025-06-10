@@ -1,6 +1,8 @@
 # RouteInfo
 
+
 A simple Garmin Connect IQ data field that reads a GPX file and reports route statistics.
+
 
 ## Features
 
@@ -13,9 +15,9 @@ A simple Garmin Connect IQ data field that reads a GPX file and reports route st
 
 Requires the Garmin Connect IQ SDK. Build using:
 
-```bash
+
 monkeydo RouteInfoField.mc [device]
-```
+
 
 ## Sample GPX
 

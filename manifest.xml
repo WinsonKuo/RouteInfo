@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
     <application id="com.example.routeinfo" runtime="3.0.0" type="datafield" entry="RouteInfoField" minSdk="3.0.0">
+
         <name>RouteInfo</name>
         <desc>Read GPX route information</desc>
         <languages>en</languages>
