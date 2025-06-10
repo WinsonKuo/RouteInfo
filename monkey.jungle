@@ -1,0 +1,4 @@
+project.app: manifest.xml
+project.file: source/RouteInfoApp.mc
+project.languages: en
+project.resources: src/resources
