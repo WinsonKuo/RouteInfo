@@ -1,7 +1,7 @@
 # RouteInfo
 
 
-A simple Garmin Connect IQ data field that reads a GPX file and reports route statistics.
+* Parse a GPX file from the app resources using simple string parsing (no Toybox.Xml).
 
 
 ## Features
