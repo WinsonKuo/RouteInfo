@@ -1,6 +1,8 @@
 # RouteInfo
 
-A simple Garmin Connect IQ application that reads a GPX file and reports route statistics.
+
+A simple Garmin Connect IQ data field that reads a GPX file and reports route statistics.
+
 
 ## Features
 
@@ -13,9 +15,9 @@ A simple Garmin Connect IQ application that reads a GPX file and reports route s
 
 Requires the Garmin Connect IQ SDK. Build using:
 
-```bash
-monkeydo RouteInfoApp.mc [device]
-```
+
+monkeydo RouteInfoField.mc [device]
+
 
 ## Sample GPX
 
