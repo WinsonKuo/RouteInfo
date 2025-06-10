@@ -4,7 +4,6 @@ using Toybox.Position;
 using Toybox.Gfx;
 using Toybox.Lang;
 using Toybox.System;
-using Toybox.Xml;
 
 /**
  * RouteInfoField
@@ -24,21 +23,40 @@ class RouteInfoField extends WatchUi.DataField {
         DataField.initialize();
     }
 
+    function _getAttr(line, attr) {
+        var key = attr + "=\"";
+        var idx = line.indexOf(key);
+        if (idx < 0) { return null; }
+        idx += key.length();
+        var endIdx = line.indexOf("\"", idx);
+        return line.substring(idx, endIdx);
+    }
+
+    function _getTag(line, tag) {
+        var startTag = "<" + tag + ">";
+        var endTag = "</" + tag + ">";
+        var startIdx = line.indexOf(startTag);
+        if (startIdx < 0) { return null; }
+        startIdx += startTag.length();
+        var endIdx = line.indexOf(endTag, startIdx);
+        return line.substring(startIdx, endIdx);
+    }
+
     function parseGpx() {
         var gpxData = Rez.getText("route_gpx");
-        var xml = Xml.fromXml(gpxData);
+        var lines = gpxData.split("\n");
         var lastPt = null;
-        if (xml.has("wpt")) {
-            foreach (var w in xml.getAll("wpt")) {
-                wpts += w;
-            }
-        }
-        var trkseg = xml.findNode("trk/trkseg");
-        if (trkseg != null) {
-            foreach (var pt in trkseg.getAll("trkpt")) {
-                var lat = pt.get("lat").toNumber();
-                var lon = pt.get("lon").toNumber();
-                var ele = pt.getChildText("ele").toNumber();
+        foreach (var line in lines) {
+            var l = line.trim();
+            if (l.startsWith("<wpt")) {
+                var lat = _getAttr(l, "lat").toNumber();
+                var lon = _getAttr(l, "lon").toNumber();
+                var name = _getTag(l, "name");
+                wpts += { :lat => lat, :lon => lon, :name => name };
+            } else if (l.startsWith("<trkpt")) {
+                var lat = _getAttr(l, "lat").toNumber();
+                var lon = _getAttr(l, "lon").toNumber();
+                var ele = _getTag(l, "ele").toNumber();
                 var pos = { :lat => lat, :lon => lon, :ele => ele };
                 if (lastPt != null) {
                     var dist = Position.distance(lastPt[:lat], lastPt[:lon], lat, lon);
@@ -94,9 +112,9 @@ class RouteInfoField extends WatchUi.DataField {
         dc.drawText(0, y, Gfx.FONT_XTINY, Lang.format("Progress %.1f%%", [progress * 100]));
         y += 12;
         foreach (var w in wpts) {
-            var wLat = w.get("lat").toNumber();
-            var wLon = w.get("lon").toNumber();
-            var wName = w.getChildText("name");
+            var wLat = w[:lat];
+            var wLon = w[:lon];
+            var wName = w[:name];
             var distToWpt = Position.distance(currLat, currLon, wLat, wLon);
             dc.drawText(0, y, Gfx.FONT_XTINY, wName + ": " + Lang.format("%.0fm", [distToWpt]));
             y += 12;
